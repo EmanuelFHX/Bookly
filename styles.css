@@ -1069,6 +1069,17 @@ button svg {
 }
 
 @media (max-width: 620px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .library {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
   .brand {
     font-size: 2rem;
   }
@@ -1084,10 +1095,6 @@ button svg {
   }
 
   .theme-toggle {
-    padding: 0;
-  }
-
-  .theme-toggle span {
     display: none;
   }
 
@@ -1098,20 +1105,32 @@ button svg {
   .reading-card {
     gap: 1rem;
     grid-template-columns: 6.7rem minmax(0, 1fr);
+    max-width: 100%;
+    overflow: hidden;
     padding: 0.85rem;
+    width: 100%;
+  }
+
+  .reading-card::after,
+  .reading-art {
+    display: none;
   }
 
   .reading-copy {
+    min-width: 0;
+    overflow: hidden;
     padding: 0.3rem 0;
   }
 
   .reading-copy h2 {
-    font-size: 1.65rem;
+    font-size: 1.48rem;
+    line-height: 1.05;
   }
 
   .reading-copy .author {
     font-size: 1rem;
     margin-bottom: 0.85rem;
+    overflow-wrap: anywhere;
   }
 
   .progress-row {
@@ -1125,11 +1144,17 @@ button svg {
   }
 
   .outline-button {
+    max-width: 100%;
     width: 100%;
   }
 
   .section-heading {
+    gap: 1rem;
     padding-inline: 0.5rem;
+  }
+
+  .link-button {
+    flex-shrink: 0;
   }
 
   .shelf-grid {
