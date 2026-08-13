@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookly - Book Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="ambient" aria-hidden="true">
+        <div class="lamp">
+          <span></span>
+        </div>
+        <div class="plant">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+        <div class="book-stack">
+          <b></b>
+          <b></b>
+          <b></b>
+        </div>
+      </aside>
+
+      <main class="library">
+        <header class="topbar">
+          <a class="brand" href="#" aria-label="Bookly">Bookly<span>.</span></a>
+
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
+            </svg>
+            <input id="searchInput" type="search" placeholder="Pesquisar livros ou autores..." />
+          </label>
+
+          <div class="actions">
+            <button class="icon-button add-button" id="openModal" aria-label="Cadastrar livro">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Alternar iluminação">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3v2M12 19v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M3 12h2M19 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                <circle cx="12" cy="12" r="4" />
+              </svg>
+              <span></span>
+            </button>
+          </div>
+        </header>
+
+        <section class="hero">
+          <p class="eyebrow">Sua biblioteca</p>
+          <h1>Sua biblioteca</h1>
+          <p id="libraryCount">0 livros esperando por você.</p>
+        </section>
+
+        <section class="featured" id="featuredSection" aria-labelledby="featuredTitle"></section>
+
+        <section class="shelf-section" aria-labelledby="wantTitle">
+          <div class="section-heading">
+            <h2 id="wantTitle">Quero ler</h2>
+            <button class="link-button" data-filter="want">Ver todos
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+          <div class="shelf-wrap">
+            <div class="shelf-grid" id="wantGrid"></div>
+          </div>
+        </section>
+
+        <section class="shelf-section" aria-labelledby="doneTitle">
+          <div class="section-heading done">
+            <h2 id="doneTitle">Concluídos</h2>
+            <button class="link-button" data-filter="done">Ver todos
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+          <div class="shelf-wrap">
+            <div class="shelf-grid" id="doneGrid"></div>
+          </div>
+        </section>
+
+        <section class="stats" id="stats" aria-label="Resumo da biblioteca"></section>
+      </main>
+    </div>
+
+    <dialog class="book-modal" id="bookModal">
+      <form id="bookForm" method="dialog">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">Novo livro</p>
+            <h2>Cadastrar na biblioteca</h2>
+          </div>
+          <button class="icon-button ghost" id="closeModal" type="button" aria-label="Fechar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+        </div>
+
+        <div class="form-grid">
+          <label>Título
+            <input name="title" required maxlength="60" placeholder="Título do livro" />
+          </label>
+          <label>Autor
+            <input name="author" required maxlength="60" placeholder="Nome do autor" />
+          </label>
+          <label>Páginas
+            <input name="pages" required type="number" min="1" max="3000" placeholder="Total de páginas" />
+          </label>
+          <label>Página atual
+            <input name="currentPage" type="number" min="0" max="3000" value="0" />
+          </label>
+          <label>Status
+            <select name="status">
+              <option value="want">Quero ler</option>
+              <option value="reading">Lendo</option>
+              <option value="done">Concluído</option>
+            </select>
+          </label>
+          <label>Avaliação
+            <select name="rating">
+              <option value="0">Sem avaliação</option>
+              <option value="1">1 estrela</option>
+              <option value="2">2 estrelas</option>
+              <option value="3">3 estrelas</option>
+              <option value="4">4 estrelas</option>
+              <option value="5">5 estrelas</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="cover-options" role="radiogroup" aria-label="Estilo da capa">
+          <label><input type="radio" name="cover" value="forest" checked /><span class="cover-swatch forest"></span></label>
+          <label><input type="radio" name="cover" value="dune" /><span class="cover-swatch dune"></span></label>
+          <label><input type="radio" name="cover" value="city" /><span class="cover-swatch city"></span></label>
+          <label><input type="radio" name="cover" value="classic" /><span class="cover-swatch classic"></span></label>
+        </div>
+
+        <menu class="modal-actions">
+          <button class="secondary" id="cancelBook" type="button">Cancelar</button>
+          <button class="primary" id="saveBook" type="submit">Salvar livro</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
